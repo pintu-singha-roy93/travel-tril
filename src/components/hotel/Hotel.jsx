@@ -31,7 +31,7 @@ const Hotel = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/hotels")
+    fetch("https://travel-tril-itbd.vercel.app/api/hotels")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Hotel API error");

@@ -19,7 +19,7 @@ const CarDeals = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/transport")
+    fetch("https://travel-tril-itbd.vercel.app/api/transport")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Transport API Error");

@@ -21,7 +21,7 @@ const CuratedSection = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/curated")
+    fetch("https://travel-tril-itbd.vercel.app/api/curated")
       .then((response) => {
         if (!response.ok) {
           throw new Error("API response error");

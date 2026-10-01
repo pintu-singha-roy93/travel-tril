@@ -32,7 +32,7 @@ const Trending = () => {
 
   // API call
 useEffect(() => {
-  fetch("http://localhost:5000/api/trending")
+  fetch("https://travel-tril-itbd.vercel.app/api/trending")
     .then((response) => {
       if (!response.ok) {
         throw new Error("API response error");

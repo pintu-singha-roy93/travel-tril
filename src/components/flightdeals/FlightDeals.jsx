@@ -15,7 +15,7 @@ const FlightDeals = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/flights")
+    fetch("https://travel-tril-itbd.vercel.app/api/flights")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Flight API Error");
