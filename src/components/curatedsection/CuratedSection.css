@@ -1,0 +1,20 @@
+.curated_flex {
+    width: 100%;
+}
+
+.curated_swiper {
+    width: 100%;
+}
+
+.curated_swiper .swiper-wrapper {
+    align-items: stretch;
+}
+
+.curated_swiper .swiper-slide {
+    height: auto;
+    box-sizing: border-box;
+}
+
+.trip_card {
+    height: 100%;
+}

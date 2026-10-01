@@ -1,0 +1,1976 @@
+
+
+.top_cmn_pad {
+    padding-top:3.125rem;
+}
+.btm_cmn_pad {
+    padding-bottom:3.125rem;
+}
+
+
+.section_head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+.section_title {
+    font-size: var(--para-font-size);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--head-font-color);
+    margin-bottom: 0;
+}
+
+.section_subtitle {
+    font-size: var(--xx-small-font-size);
+    line-height: 1.7;
+    color: var(--body-color);
+    margin: 0;
+    margin-top: 0.625rem;
+}
+
+
+.see_all_btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: var(--small-font-size);
+    font-weight: 500;
+    color: var(--theme-color1);
+    text-decoration: none;
+    transition: 0.3s ease;
+    flex-shrink: 0;
+}
+
+.see_all_btn img {
+    width: 1rem;
+}
+
+
+.see_all_btn svg{
+	transition: 0.35s ease;
+}
+
+/* path */
+
+.see_all_btn svg path{
+	fill: #60A5FA;
+	transition: 0.35s ease;
+}
+
+/* hover */
+
+.see_all_btn:hover{
+	color: #000;
+}
+
+/* svg hover */
+
+.see_all_btn:hover svg path{
+	fill: #000;
+}
+
+/* optional arrow move */
+
+.see_all_btn:hover svg{
+	transform: translateX(3px);
+}
+.see_all_btn img {
+	width: 0.9rem;
+}
+/* ===================================================
+   Flex Layout
+=================================================== */
+
+.curated_flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+}
+
+/* ===================================================
+   Card
+=================================================== */
+
+.trip_card {
+    position: relative;
+    width:100% ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.25rem;
+    background: #ffffff;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: 0.35s ease;
+    margin-bottom: 1.5rem;
+}
+
+.trip_card:hover {
+    transform: translateY(-0.4rem);
+}
+
+.trip_card_shape {
+    position: absolute;
+    top: -3rem;
+    right: -3rem;
+    width: 9.313rem;
+    height:8.438rem;
+    border-radius: 50%;
+    background: #FEF1F8;
+}
+
+.trip_card_shape2 {
+    background: #EFF6FE;
+}
+
+.trip_card_shape3 {
+    background: #F6F3FE;
+}
+
+.trip_card_icon {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.trip_card_icon img {
+    width: 2.875rem;
+    transition: all 0.5s;
+}
+.trip_card .trip_card_icon img{
+    transform: rotate(5deg);
+}
+.trip_card:nth-child(even) .trip_card_icon img{
+    transform: rotate(-5deg);
+}
+.trip_card:hover .trip_card_icon img{
+    transform: rotate(0deg) !important;
+}
+.trip_card_content {
+    position: relative;
+    z-index: 2;
+}
+
+.trip_card_title {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--head-font-color);
+    margin-bottom: 0.6rem;
+}
+
+.trip_card_text {
+    font-size: var(--xx-small-font-size);
+    font-weight: 400;
+    color: var(--body-color);
+    line-height: 1.5;
+    margin: 0;
+}
+
+
+.trip_card_bottom {
+	position: relative;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 1.5rem;
+}
+
+.trip_card_price {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--head-font-color);
+}
+
+
+.trip_card_btn {
+    width: 1.8rem;
+    height: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #F9FAFB;
+
+    transition: 0.3s ease;
+}
+
+.trip_card_btn img {
+    width: 1.2rem;
+}
+.trip_card_btn1:hover{
+    background-color: #F472B6;
+}
+.trip_card_btn2:hover {
+    background-color: #60A5FA;
+}
+
+.trip_card_btn3:hover {
+    background-color: #A78BFA;
+}
+
+.trip_card_btn{
+    transition: all 0.5s;
+}
+.trip_card_btn svg {
+    color: var(--head-font-color);
+    transition:
+        color 0.4s cubic-bezier(.4,0,.2,1),
+        transform 0.4s cubic-bezier(.4,0,.2,1);
+}
+
+.trip_card_btn:hover svg {
+    color: var(--white-color);
+}
+.trip_card{
+    will-change: transform;
+}
+/* GPU acceleration */
+.trip_card_icon img{
+    backface-visibility: hidden;
+}
+/* cleaner */
+.trip_card_btn{
+    flex-shrink: 0;
+}
+.trip_card_shape{
+    pointer-events: none;
+}
+
+
+/* ===================================================
+   Common Box1 End
+=================================================== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===================================================
+   Common Box2 Start
+=================================================== */
+
+
+.slider_place{
+    overflow: hidden;
+}
+
+.trending_card {
+    padding: 1.25rem;
+    background: #ffffff;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: 0.4s ease;
+    height: 100%;
+}
+
+.trending_card:hover .trending_thumb img {
+    transform: scale(1.06);
+}
+.trending_thumb {
+    position: relative;
+    border-radius: 0.6rem;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.trending_thumb img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: 0.5s ease;
+}
+.trending_rating {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: #ffffff;
+    padding: 0.236rem 0.5rem;
+    border-radius: 5rem;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--head-font-color);
+}
+.trending_rating span{
+    font-weight: 500;
+    color: #a2a2a2;
+}
+.trending_rating img {
+    width: 0.8rem !important;
+    height: 0.8rem !important;
+}
+.trending_title {
+    font-size:var(--small-font-size);
+    font-weight: 700;
+    color: var(--head-font-color);
+    margin-bottom: 0;
+}
+
+.trending_top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.4rem;
+}
+
+
+.trending_tag {
+    font-size: var(--xx-small-font-size);
+    font-weight: 500;
+    padding: 0.2rem 0.55rem;
+    border-radius: 5rem;
+    background: #eee;
+    color: #000;
+    line-height: 1;
+}
+
+.hot_tag {
+    background: #EEF4FF;
+    color: #60A5FA;
+}
+
+.tred_tag {
+    background: #F3E8FF;
+    color: #A855F7;
+}
+.trending_meta {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.trending_meta img {
+	width: 1.2rem !important;
+}
+
+.trending_meta span {
+    font-size: var(--xx-small-font-size);
+    color: var(--body-color);
+}
+.trending_head {
+    align-items: center;
+}
+
+.trending_nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.trending_arrow {
+    width: 1.625rem;
+    height: 1.625rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    color: var(--head-font-color);
+
+    transition: all 0.4s ease;
+
+    padding: 0;
+}
+
+.trending_arrow:hover {
+    background: var(--theme-color1);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.trending_slider .owl-stage {
+    display: flex;
+}
+
+.trending_slider .owl-item {
+    height: auto;
+}
+
+.trending_slider .owl-stage-outer {
+    overflow: visible;
+}
+
+/* ===================================================
+   Common Box2 End
+=================================================== */
+
+
+
+/* ===================================================
+   Common Box3 Start
+=================================================== */
+
+
+.commonbox_sec3 .trending_rating {
+	right: auto;
+	left: 0.75rem;
+}
+.stay_wishlist {
+	position: absolute;
+	top: 0.75rem;
+	right: 0.75rem;
+	width: 1.5rem;
+	height: 1.5rem;
+	border: none;
+	border-radius: 50%;
+	background: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--body-color);
+	transition: 0.35s ease;
+	font-size: 10px;
+}
+.stay_wishlist:hover,
+.stay_wishlist.active {
+    color: #EC4899;
+}
+
+.stay_card .trending_thumb {
+	margin-bottom: 0;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+.stay_flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.stay_card {
+    width: calc((100% - 3rem) / 4);
+    background: #fff;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: 0.4s ease;
+}
+
+.stay_card:hover {
+    transform: translateY(-0.35rem);
+}
+
+.stay_card:hover .trending_thumb img {
+    transform: scale(1.06);
+}
+
+.stay_card .trending_thumb {
+    margin-bottom: 0;
+}
+
+.stay_card .trending_thumb img {
+    /* aspect-ratio: 1.25 / 1; */
+    object-fit: cover;
+}
+.stay_content {
+    padding: 1rem;
+}
+
+.stay_top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+}
+
+.stay_price {
+    font-size: var(--small-font-size);
+    font-weight: 700;
+    color: var(--head-font-color);
+    line-height: 1.1;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.stay_price span {
+    display: block;
+    font-size: var(--xx-small-font-size);
+    font-weight: 400;
+    color: var(--body-color);
+    margin-top: 0.2rem;
+}
+.stay_features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.stay_feature {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.6rem;
+    border: 1px solid #EAEAEA;
+    border-radius: 0.4rem;
+    background: #F9FAFB;
+    font-size: 0.6rem;
+    color: var(--body-color);
+    line-height: 1;
+}
+
+.stay_feature img {
+    width: 0.70rem;
+}
+.stay_location {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+
+    margin-bottom: 1rem;
+}
+
+.stay_location img {
+    width: 0.9rem;
+}
+
+.stay_location span {
+    font-size: var(--xx-small-font-size);
+    color: var(--body-color);
+}
+
+
+/* ===================================================
+   Common Box3 End
+=================================================== */
+
+
+
+
+
+
+
+/* ===================================================
+   Flight Deals Start
+=================================================== */
+
+.trip_switch {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem;
+    background: #F3F4F6;
+    border-radius: 5rem;
+    gap: 0.2rem;
+}
+
+/* radio hidden */
+.trip_switch_item input {
+    display: none;
+}
+
+.trip_switch_btn {
+    position: relative;
+
+    min-width: 6.8rem;
+    height: 2.5rem;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 1.3rem;
+
+    border-radius: 5rem;
+
+    font-size: var(--small-font-size);
+    font-weight: 500;
+
+    color: var(--body-color);
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.35s ease,
+        color 0.35s ease,
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+/* active */
+.trip_switch_item input:checked + .trip_switch_btn {
+    background: #ffffff;
+    color: var(--head-font-color);
+
+    box-shadow:
+        0 0.125rem 0.5rem rgba(0, 0, 0, 0.06);
+
+    transform: translateY(-0.03rem);
+}
+
+/* hover */
+.trip_switch_btn:hover {
+    color: var(--head-font-color);
+}
+
+/* click feel */
+.trip_switch_btn:active {
+    transform: scale(0.97);
+}
+
+/* ===================================================
+   Flight Card
+=================================================== */
+
+.flight_card:hover {
+    transform: translateY(-0.2rem);
+}
+
+.flight_list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.flight_card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+
+    background: #ffffff;
+
+    border-radius: 1.5rem;
+
+    padding: 1.25rem 1.5rem;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.flight_card:hover {
+    box-shadow:
+        0 0.625rem 2rem rgba(0, 0, 0, 0.05);
+}
+
+.flight_left {
+	width: 20%;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	flex-shrink: 0;
+}
+
+.flight_logo {
+    width: 3rem;
+    height: 3rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #F9FAFB;
+
+    flex-shrink: 0;
+}
+
+.flight_logo img {
+    width: 1.4rem;
+}
+
+.flight_name {
+    font-size: var(--small-font-size);
+    font-weight: 700;
+
+    color: var(--head-font-color);
+
+    margin-bottom: 0.3rem;
+}
+
+.flight_meta {
+    font-size: var(--xx-small-font-size);
+    font-weight: 400;
+
+    color: var(--body-color);
+
+    margin: 0;
+}
+
+.flight_middle {
+    flex: 1;
+
+    max-width: 23.188rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 1.5rem;
+}
+.flight_time_box {
+    text-align: center;
+    flex-shrink: 0;
+
+    min-width: 6.5rem;
+}
+
+.flight_time {
+    font-size: var(--small-font-size);
+    font-weight: 700;
+
+    color: var(--head-font-color);
+
+    margin-bottom: 0.3rem;
+}
+
+.flight_place {
+    display: -webkit-box;
+
+    font-size: var(--xx-small-font-size);
+    color: var(--body-color);
+
+    max-width: 8rem;
+    line-height: 1.35;
+
+    overflow: hidden;
+
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    word-break: break-word;
+}
+
+/* arrival align */
+.flight_time_box:last-child .flight_place {
+    text-align: left;
+}
+
+/* departure align */
+.flight_time_box:first-child .flight_place {
+    text-align: right;
+}
+
+
+.flight_path_wrap {
+    flex: 1;
+    text-align: center;
+}
+
+.flight_duration {
+    display: inline-block;
+
+    font-size: var(--xx-small-font-size);
+
+    color: var(--body-color);
+
+    margin-bottom: 0.55rem;
+}
+
+.flight_path {
+    position: relative;
+    margin-bottom: 0.55rem;
+}
+
+.flight_line {
+    display: block;
+
+    width: 100%;
+    height: 1px;
+
+    background: #D1D5DB;
+}
+
+.flight_plane {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 1.4rem;
+    height: 1.4rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff;
+}
+
+.flight_plane img {
+    width: 0.95rem;
+}
+
+.flight_type {
+    display: inline-block;
+
+    font-size: var(--xx-small-font-size);
+
+    color: var(--body-color);
+}
+
+/* stop */
+
+.stop_plane span {
+    width: 0.45rem;
+    height: 0.45rem;
+
+    border-radius: 50%;
+
+    background: #FBBF24;
+}
+
+.stop_text {
+    color: #FBBF24;
+}
+
+/* right */
+.flight_right {
+	display: flex;
+	align-items: center;
+	gap: 1.5rem;
+	flex-shrink: 0;
+	width: 20%;
+	justify-content: flex-end;
+}
+
+.flight_price_box {
+    text-align: right;
+}
+
+.flight_price {
+    font-size: var(--small-font-size);
+    font-weight: 700;
+
+    color: var(--head-font-color);
+
+    margin-bottom: 0;
+}
+
+.flight_price_text {
+    font-size: var(--xx-small-font-size);
+
+    color: var(--body-color);
+}
+
+.flight_btn {
+    min-width: 5.313rem;
+    height: 2.75rem;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.6rem;
+
+    border-radius: 0.9rem;
+
+    background: var(--head-font-color);
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: var(--small-font-size);
+    font-weight: 500;
+
+    transition:
+        background-color 0.35s ease,
+        transform 0.35s ease;
+}
+
+.flight_btn:hover {
+    background: var(--theme-color1);
+    color: #fff;
+
+    transform: translateY(-0.08rem);
+}
+
+/* more btn */
+
+.flight_more_wrap {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 1.5rem;
+}
+
+.flight_more_btn {
+    min-width: 7.5rem;
+    height: 2.2rem;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 1rem;
+
+    border-radius: 5rem;
+
+    background: #ffffff;
+
+    text-decoration: none;
+
+    font-size: var(--xx-small-font-size);
+
+    color: var(--body-color);
+
+    transition:
+        background-color 0.35s ease,
+        color 0.35s ease,
+        transform 0.35s ease;
+}
+
+.flight_more_btn:hover {
+    background: var(--theme-color1);
+    color: #fff;
+
+    transform: translateY(-0.08rem);
+}
+
+/* ===================================================
+   Flight Deals End
+=================================================== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===================================================
+   Transport Area Start
+=================================================== */
+
+.transport_wrapper {
+    padding: 2rem;
+
+    background: #ffffff;
+
+    border-radius: 2rem;
+}
+
+.transport_head {
+    align-items: center;
+}
+
+/* ===================================================
+   Flex
+=================================================== */
+
+.transport_flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+}
+
+/* ===================================================
+   Card
+=================================================== */
+
+.transport_card {
+    width: calc((100% - 2.5rem) / 3);
+
+    padding: 0.75rem;
+
+    background: #F9FAFB;
+
+    border-radius: 1.25rem;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.transport_card:hover {
+    transform: translateY(-0.2rem);
+
+    box-shadow:
+        0 0.75rem 1.8rem rgba(0, 0, 0, 0.05);
+}
+
+/* ===================================================
+   Thumb
+=================================================== */
+
+.transport_thumb {
+    display: block;
+
+    border-radius: 0.9rem;
+
+    overflow: hidden;
+
+    margin-bottom: 1rem;
+}
+
+.transport_thumb img {
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.transport_card:hover .transport_thumb img {
+    transform: scale(1.05);
+}
+
+/* ===================================================
+   Content
+=================================================== */
+
+.transport_content {
+    margin-bottom: 0.8rem;
+}
+
+.transport_title {
+    font-size: var(--small-font-size);
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    color: var(--head-font-color);
+
+    margin-bottom: 0.2rem;
+}
+
+.transport_text {
+    font-size: var(--xx-small-font-size);
+    font-weight: 400;
+
+    line-height: 1.5;
+
+    color: var(--body-color);
+
+    margin: 0;
+}
+
+/* ===================================================
+   Meta
+=================================================== */
+
+.transport_meta {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 1rem;
+
+    margin-bottom: 1rem;
+}
+
+.transport_meta_item {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 0.35rem;
+}
+
+.transport_meta_item img {
+    width: 0.8rem;
+}
+
+.transport_meta_item span {
+    font-size: var(--xx-small-font-size);
+    font-weight: 400;
+    color: var(--body-color);
+}
+
+/* ===================================================
+   Bottom
+=================================================== */
+
+.transport_bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 1rem;
+}
+
+.transport_price {
+    font-size: var(--title-font-size);
+    font-weight: 700;
+
+    color: var(--head-font-color);
+
+    margin-bottom: 0;
+}
+
+.transport_btn {
+	min-width: 3.9rem;
+	height: 2.3rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 0.4rem;
+	border-radius: 0.5rem;
+	background: #ffffff;
+	border: 1px solid #E5E7EB;
+	text-decoration: none;
+	font-size: var(--small-font-size);
+	font-weight: 500;
+	color: var(--head-font-color);
+	transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
+}
+
+.transport_btn:hover {
+    background: var(--theme-color1);
+
+    border-color: var(--theme-color1);
+
+    color: #ffffff;
+
+    transform: translateY(-0.08rem);
+}
+
+.active_btn {
+    background: var(--theme-color2);
+
+    border-color: var(--theme-color2);
+
+    color: #ffffff;
+}
+
+.active_btn:hover {
+    background: var(--head-font-color);
+
+    border-color: var(--head-font-color);
+}
+
+.trans_otter {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+}
+
+.trans_otter > div {
+	margin-bottom: 0px;
+}
+
+/* ===================================================
+   Transport Area End
+=================================================== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===================================================
+   Hero Banner Start
+=================================================== */
+
+.hero_banner_area{
+    overflow: visible;
+}
+
+.hero_banner_wrap {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 3.125rem 6.375rem;
+
+    border-radius: 1.875rem;
+    background: #ffffff;
+
+    z-index: 1;
+}
+
+/* ===================================================
+   Background Shapes
+=================================================== */
+
+.hero_shape{
+    position: absolute;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+/* top right circle */
+
+.hero_shape1{
+    width: 28rem;
+    height: 28rem;
+
+    top: -12rem;
+    right: -12rem;
+
+    background: #EEF4FF;
+}
+
+/* bottom left circle */
+
+.hero_shape2{
+    width: 24rem;
+    height: 24rem;
+
+    bottom: -14rem;
+    left: -10rem;
+
+    background: #F4EEFF;
+}
+
+/* ===================================================
+   Hero Content
+=================================================== */
+
+.hero_banner_content,
+.booking_topbar,
+.booking_tab_contents{
+    position: relative;
+    z-index: 2;
+}
+
+.hero_banner_content {
+    text-align: center;
+
+    max-width: 52rem;
+    margin: 0 auto 2rem;
+}
+
+.hero_title {
+    font-size: 4rem;
+    line-height: 1.05;
+    font-weight: 700;
+
+    color: var(--head-font-color);
+
+    margin-bottom: 1rem;
+}
+
+.hero_title span {
+    color: #F472B6;
+
+    font-family: var(--font-heading);
+    font-weight: 500;
+
+    display: inline-block;
+
+    transform: rotate(-2deg);
+}
+
+.hero_subtitle {
+    max-width: 35.375rem;
+
+    margin: 0 auto;
+
+    font-size: var(--title-font-size);
+    line-height: 1.7;
+
+    color: var(--body-color);
+}
+
+/* ===================================================
+   Topbar
+=================================================== */
+
+.booking_topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 2rem;
+
+    margin-bottom: 1.8rem;
+}
+
+/* ===================================================
+   Service Tabs
+=================================================== */
+
+.booking_service_tabs {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 1.2rem;
+}
+
+.booking_service_btn {
+    border: none;
+    background: transparent;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 0.35rem;
+
+    cursor: pointer;
+    position: relative;
+
+    transition: 0.35s ease;
+}
+
+.booking_service_icon {
+    width: 3rem;
+    height: 3rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #F3F4F6;
+
+    transition: 0.35s ease;
+}
+
+.booking_service_icon svg {
+    width: 1.15rem;
+    height: 1.15rem;
+}
+
+.booking_service_icon svg path {
+    fill: #A2A2A2;
+    transition: 0.35s ease;
+}
+
+.booking_service_btn span {
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    color: var(--body-color);
+
+    transition: 0.35s ease;
+}
+
+/* active */
+
+.booking_service_btn.active .booking_service_icon {
+    background: #60A5FA;
+}
+
+.booking_service_btn.active .booking_service_icon svg path {
+    fill: #ffffff;
+}
+
+.booking_service_btn.active span {
+    color: #60A5FA;
+}
+
+.booking_service_btn.active::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: -0.55rem;
+
+    width: 0.28rem;
+    height: 0.28rem;
+
+    border-radius: 50%;
+
+    background: #60A5FA;
+}
+
+/* ===================================================
+   Trip Type Switch
+=================================================== */
+
+.trip_type_switch {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 0.3rem;
+
+    border-radius: 5rem;
+
+    background: #F3F4F6;
+}
+
+.trip_type_item {
+    position: relative;
+    cursor: pointer;
+}
+
+.trip_type_item input {
+    position: absolute;
+
+    opacity: 0;
+    pointer-events: none;
+}
+
+.trip_type_item span {
+    min-width: 8rem;
+    height: 2.8rem;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 5rem;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    color: #6B7280;
+
+    transition: 0.35s ease;
+}
+
+.trip_type_item input:checked + span {
+    background: #ffffff;
+    color: var(--head-font-color);
+}
+
+/* ===================================================
+   Tab Content
+=================================================== */
+
+.booking_tab_contents {
+    position: relative;
+    z-index: 50;
+
+    overflow: visible;
+}
+
+.booking_tab_content {
+    display: none;
+
+    overflow: visible;
+}
+
+.booking_tab_content.active {
+    display: block;
+}
+
+/* ===================================================
+   Search Wrap
+=================================================== */
+
+.booking_search_wrap {
+	position: relative;
+	display: flex;
+	align-items: center;
+	border: 2px solid #F3F3F3;
+	border-radius: 5rem;
+	background: #ffffff;
+	padding: 0.625rem;
+	overflow: visible;
+	z-index: 100;
+}
+
+/* ===================================================
+   Field
+=================================================== */
+
+.booking_field {
+	position: relative;
+	flex: 1;
+	min-height: 3.5rem;
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	padding: 0.7rem 0.625rem;
+	border-radius: 3rem;
+	background: #F9FAFB;
+}
+.booking_field:not(:last-child) {
+    margin-right: 5px;
+}
+.booking_field:not(:first-child){
+     margin-left: 5px;
+}
+#flight .booking_field:first-child:after{
+    display: none;
+}
+.booking_field:not(:last-child)::after {
+    content: "";
+
+    position: absolute;
+
+    right: -0.3rem;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 1px;
+    height: 1.5rem;
+
+    background: #D1D5DB;
+}
+
+.booking_field_icon {
+    width: 1.5rem;
+    height: 1.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+.booking_field_icon img {
+	width: 1.2rem;
+}
+
+.booking_field_content {
+    flex: 1;
+    min-width: 0;
+}
+
+.booking_label {
+	display: block;
+	font-size: 0.82rem;
+	font-weight: 500;
+	color: #6B7280;
+	margin-bottom: 0.1rem;
+	line-height: 1.1;
+}
+
+.booking_field input,
+.guest_dropdown_btn {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 0;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--body-color);
+
+    text-align: left;
+}
+
+.booking_field input::placeholder,
+.guest_dropdown_btn {
+    color: #374151;
+}
+
+/* ===================================================
+   Swap Button
+=================================================== */
+.swap_btn {
+	width: 1.8rem;
+	height: 1.8rem;
+	border: none;
+	border-radius: 50%;
+	background: #ffffff;
+	box-shadow: 0 0.20rem 0.6rem rgba(0,0,0,0.08);
+	flex-shrink: 0;
+	cursor: pointer;
+	margin-right: 0;
+	transition: 0.4s ease;
+	position: absolute;
+	left: 212.6px;
+	z-index: 99;
+	font-size: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+/* svg */
+.swap_btn svg {
+	transition: 0.4s ease;
+	position: relative;
+	z-index: 2;
+}
+
+/* svg path */
+.swap_btn svg path {
+	transition: 0.4s ease;
+}
+
+/* hover effect */
+
+.swap_btn:hover {
+	background: #60A5FA;
+
+	transform: rotate(180deg) scale(1.08);
+
+	box-shadow: 0 0.7rem 1.5rem rgba(96,165,250,0.35);
+}
+
+/* svg white on hover */
+
+.swap_btn:hover svg path {
+	fill: #ffffff;
+}
+
+/* click animation */
+
+.swap_btn:active {
+	transform: rotate(180deg) scale(0.95);
+}
+
+
+
+/* ===================================================
+   Submit Button
+=================================================== */
+.booking_submit_btn {
+	min-width: 9rem;
+	height: 3.902rem;
+	border: none;
+	padding: 0 2rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.6rem;
+	border-radius: 5rem;
+	background: #60A5FA;
+	font-size: var(--small-font-size);
+	font-weight: 700;
+	color: #ffffff;
+	cursor: pointer;
+	margin-left: 5px;
+	transition: 0.35s ease;
+}
+
+.booking_submit_btn img {
+    width: 1rem;
+}
+
+.booking_submit_btn:hover {
+	transform: translateY(-2px);
+	background-color: var(--theme-color2);
+}
+
+/* ===================================================
+   Guest Dropdown
+=================================================== */
+
+.guest_dropdown_wrap {
+    position: relative;
+
+    z-index: 9999;
+}
+
+.guest_dropdown {
+    position: absolute;
+
+    top: calc(100% + 14px);
+    right: 0;
+
+    width: 275px;
+    min-height: 271px;
+
+    background: #ffffff;
+
+    border-radius: 1.5rem;
+
+    padding: 1rem;
+
+    box-shadow: 0 1rem 3rem rgba(0,0,0,0.12);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(10px);
+
+    transition: 0.35s ease;
+
+    z-index: 99999;
+}
+
+.guest_dropdown.active {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateY(0);
+}
+
+/* ===================================================
+   Room Title
+=================================================== */
+
+.guest_room_title {
+    font-size: 1rem;
+    font-weight: 700;
+
+    color: #6B7280;
+
+    margin-bottom: 1.3rem;
+}
+
+/* ===================================================
+   Counter Item
+=================================================== */
+
+.guest_counter_item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 1rem;
+
+    margin-bottom: 1rem;
+}
+
+.guest_counter_left h5 {
+    font-size: 0.95rem;
+    font-weight: 700;
+
+    color: #1F2937;
+
+    margin-bottom: 0.15rem;
+}
+
+.guest_counter_left span {
+    display: block;
+
+    font-size: 0.78rem;
+
+    color: #6B7280;
+}
+
+/* ===================================================
+   Counter Box
+=================================================== */
+
+.guest_counter_box {
+    min-width: 105px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 0.4rem;
+
+    border-radius: 5rem;
+
+    background: #ffffff;
+
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.counter_btn {
+    width: 28px;
+    height: 28px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #EEF4FF;
+
+    font-size: 1rem;
+    font-weight: 700;
+
+    color: #60A5FA;
+
+    cursor: pointer;
+}
+
+.counter_value {
+    font-size: 0.95rem;
+    font-weight: 700;
+
+    color: #1F2937;
+}
+
+/* ===================================================
+   Select
+=================================================== */
+
+.guest_age_select_wrap {
+    margin-bottom: 1rem;
+}
+
+.guest_age_select {
+    width: 100%;
+    height: 38px;
+
+    border: 1px solid #E5E7EB;
+    outline: none;
+
+    border-radius: 0.9rem;
+
+    padding: 0 1rem;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    color: #1F2937;
+
+    appearance: none;
+
+    background:
+        url("images/down_arrow.svg")
+        no-repeat
+        right 1rem center;
+}
+
+/* ===================================================
+   Add Room
+=================================================== */
+
+.add_room_btn {
+    border: none;
+    background: transparent;
+
+    display: block;
+    margin-left: auto;
+
+    font-size: 0.95rem;
+    font-weight: 700;
+
+    color: #60A5FA;
+
+    cursor: pointer;
+}
+
+
+
+
+.booking_field, .booking_submit_btn {
+	width: calc(100% / 5);
+}
+.booking_submit_btn{
+    width: calc((100% / 5) - 40px);
+}
+
+
+/* ===================================================
+   Responsive
+=================================================== */
+
+@media (max-width: 1199px) {
+
+    .hero_banner_wrap {
+        padding: 3rem;
+    }
+
+    .booking_search_wrap {
+        flex-wrap: wrap;
+        border-radius: 2rem;
+    }
+
+    .booking_submit_btn {
+        width: 100%;
+
+        margin: 0;
+        margin-top: 1rem;
+    }
+
+}
+
+@media (max-width: 991px) {
+
+    .hero_banner_wrap {
+        padding: 3rem 2rem;
+    }
+
+    .booking_topbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero_title {
+        font-size: 3rem;
+    }
+
+}
+
+@media (max-width: 767px) {
+
+    .hero_banner_wrap {
+        padding: 2rem 1rem;
+        border-radius: 1.5rem;
+    }
+
+    .hero_title {
+        font-size: 2.4rem;
+        line-height: 1.2;
+    }
+
+    .booking_service_tabs {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .trip_type_switch {
+        width: 100%;
+    }
+
+    .trip_type_item {
+        flex: 1;
+    }
+
+    .trip_type_item span {
+        width: 100%;
+        min-width: 100%;
+    }
+
+    .booking_field {
+        width: 100%;
+        flex: unset;
+    }
+
+    .booking_field::after {
+        display: none;
+    }
+
+    .swap_btn {
+        margin: 0 auto;
+    }
+
+    .guest_dropdown {
+        width: 100%;
+
+        right: auto;
+        left: 0;
+    }
+
+}
+
+@media (max-width: 575px) {
+
+    .hero_title {
+        font-size: 2rem;
+    }
+
+    .booking_service_btn span {
+        font-size: 0.65rem;
+    }
+
+    .booking_submit_btn {
+        min-height: 4rem;
+    }
+
+    .guest_dropdown {
+        width: 100%;
+        min-width: 100%;
+    }
+
+}
