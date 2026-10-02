@@ -383,3 +383,129 @@
 
 
 
+@media (max-width: 991.98px) {
+
+  .header_inner {
+    position: relative;
+  }
+
+  /* =========================
+     HAMBURGER BUTTON
+  ========================= */
+
+  .menu_toggle {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    position: relative;
+    z-index: 1001;
+  }
+
+  .menu_toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+
+    transition:
+      transform 0.35s ease,
+      opacity 0.25s ease;
+  }
+
+  /* Hamburger → X */
+
+  .menu_toggle.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .menu_toggle.open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .menu_toggle.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+
+  /* =========================
+     MOBILE MENU
+  ========================= */
+
+  .menu_list {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    margin: 0;
+    padding: 10px;
+
+    background: #fff;
+
+    z-index: 1000;
+
+    /* Animation initial state */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-15px);
+
+    pointer-events: none;
+
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease,
+      visibility 0.35s ease;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  }
+
+
+  /* Menu Open */
+
+  .menu_list.menu_open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+
+    pointer-events: auto;
+  }
+
+
+  /* Menu Items */
+
+  .menu_list li {
+    width: 100%;
+  }
+
+  .menu_list li a {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+
+    text-decoration: none;
+
+    transition:
+      background 0.25s ease,
+      padding-left 0.25s ease;
+  }
+
+  .menu_list li a:hover {
+    padding-left: 20px;
+  }
+}

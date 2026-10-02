@@ -7,10 +7,13 @@ import Trending from "../../components/trending/Trending";
 import Hotel from "../../components/hotel/Hotel";
 import FlightDeals from "../../components/flightdeals/FlightDeals";
 import CarDeals from "../../components/cardeals/CarDeals";
+import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
 
 const Home = () => {
   return (
     <div className="home">
+      <Header />
       <section className="hero_banner_area">
         <div className="container">
           <div className="hero_banner_wrap">
@@ -35,6 +38,7 @@ const Home = () => {
       <Hotel />
       <FlightDeals />
       <CarDeals />
+    <Footer />
     </div>
   );
 };
