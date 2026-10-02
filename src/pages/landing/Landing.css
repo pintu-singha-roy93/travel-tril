@@ -504,7 +504,10 @@
 
 /* 1400px */
 @media (max-width: 1400px) {
-
+.header_inner {
+    padding-top:0.9rem;
+    padding-bottom: 0.9rem;
+}
   .map {
     width: 110px;
     height: 110px;
@@ -536,7 +539,7 @@
 .step-wrapper {
     padding: 19px 14px;
     margin-top: 11px;
-    margin-bottom: 11px;
+    margin-bottom: 25px;
 }
   #plane {
     width: 45px;

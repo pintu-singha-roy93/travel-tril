@@ -509,3 +509,436 @@
     padding-left: 20px;
   }
 }
+
+.account_menu {
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.account_menu > .user_btn {
+    width: auto;
+    height: 2.75rem;
+    min-height: 2.75rem;
+    margin: 0;
+    padding: 0 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    color: #263746;
+    background: #fff;
+    border: 1px solid #dce4e9;
+    border-radius: 999px;
+    box-shadow: 0 1px 2px rgba(20, 38, 52, 0.04);
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transform: none;
+}
+
+.account_menu > .user_btn:hover {
+    color: #174ea6;
+    background: #f6f9fc;
+    border-color: #bdcddd;
+    transform: none;
+}
+
+.account_menu > .user_btn.is_open,
+.account_menu > .user_btn:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.16);
+    outline-offset: 2px;
+}
+
+.user_btn_label {
+    white-space: nowrap;
+}
+
+.user_avatar {
+    width: 1.75rem;
+    height: 1.75rem;
+    flex: 0 0 auto;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.account_identity {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.account_profile_picture,
+.account_avatar_fallback {
+    width: 3rem;
+    height: 3rem;
+    flex: 0 0 auto;
+    border-radius: 50%;
+}
+
+.account_profile_picture {
+    object-fit: cover;
+}
+
+.account_avatar_fallback {
+    display: grid;
+    place-items: center;
+    color: #174ea6;
+    background: #e8f0fe;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.login_chevron {
+    width: 0.45rem;
+    height: 0.45rem;
+    margin-top: -0.2rem;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 150ms ease;
+}
+
+.user_btn.is_open .login_chevron {
+    margin-top: 0.2rem;
+    transform: rotate(225deg);
+}
+
+.user_btn.is_open,
+.user_btn:focus-visible {
+    outline-color: rgba(37, 99, 235, 0.16);
+}
+
+.login_dropdown {
+    position: absolute;
+    z-index: 1100;
+    top: calc(100% + 0.85rem);
+    right: 0;
+    width: min(23rem, calc(100vw - 2rem));
+    max-height: min(80vh, 40rem);
+    overflow-y: auto;
+    padding: 1.5rem;
+    color: #1d2932;
+    background: #fff;
+    border: 1px solid #e1e7eb;
+    border-top: 3px solid #2563eb;
+    border-radius: 0.9rem;
+    box-shadow: 0 1rem 2.5rem rgba(24, 43, 52, 0.16);
+    animation: loginDropdownIn 160ms ease-out;
+}
+
+.login_dropdown_heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.login_kicker {
+    color: #2563eb;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.login_close {
+    position: relative;
+    flex: 0 0 auto;
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    margin: -0.2rem -0.2rem 0 0;
+    padding: 0;
+    background: #f3f6f8;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.login_close:hover {
+    background: #e9eff4;
+}
+
+.login_close:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.2);
+    outline-offset: 2px;
+}
+
+.login_close span {
+    position: absolute;
+    width: 0.75rem;
+    height: 1.5px;
+    background: #52616b;
+    border-radius: 1px;
+}
+
+.login_close span:first-child {
+    transform: rotate(45deg);
+}
+
+.login_close span:last-child {
+    transform: rotate(-45deg);
+}
+
+.login_dropdown_heading h2 {
+    margin: 0.35rem 0 0.2rem;
+    color: #1d2932;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.login_dropdown_heading p {
+    margin: 0;
+    color: #64727b;
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+.login_form {
+    display: grid;
+    gap: 0.55rem;
+}
+
+.login_form label {
+    margin-top: 0.25rem;
+    color: #34434c;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.login_password_label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.login_password_label label {
+    margin-top: 0;
+}
+
+.login_password_label span {
+    color: #7b8991;
+    font-size: 0.72rem;
+}
+
+.login_form input {
+    width: 100%;
+    min-width: 0;
+    height: 2.85rem;
+    padding: 0 0.85rem;
+    color: #1d2932;
+    background: #fff;
+    border: 1px solid #d9e1e4;
+    border-radius: 0.55rem;
+    font: inherit;
+    font-size: 0.88rem;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.login_form input::placeholder {
+    color: #98a4aa;
+}
+
+.login_form input:focus {
+    border-color: #2563eb;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.login_password_field {
+    position: relative;
+}
+
+.login_password_field input {
+    padding-right: 4.2rem;
+}
+
+.password_visibility {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    padding: 0.25rem;
+    color: #52616b;
+    background: transparent;
+    border: 0;
+    font-size: 0.76rem;
+    font-weight: 600;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.password_visibility:hover {
+    color: #174ea6;
+}
+
+.login_submit {
+    min-height: 2.9rem;
+    margin-top: 0.55rem;
+    color: #fff;
+    background: #2563eb;
+    border: 0;
+    border-radius: 0.55rem;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: filter 150ms ease, transform 150ms ease;
+}
+
+.login_submit:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.login_submit:disabled,
+.login_mode_switch button:disabled {
+    opacity: 0.65;
+    cursor: wait;
+    transform: none;
+}
+
+.login_submit:focus-visible,
+.password_visibility:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.22);
+    outline-offset: 2px;
+}
+
+.login_message {
+    margin: 0.25rem 0 0;
+    color: #9a4b26;
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.login_message.error {
+    padding: 0.65rem 0.75rem;
+    color: #9f2828;
+    background: #fff4f2;
+    border: 1px solid #f3d2ce;
+    border-radius: 0.5rem;
+}
+
+.login_mode_switch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin: 1rem 0 0;
+    padding-top: 0.9rem;
+    color: #64727b;
+    border-top: 1px solid #edf0f2;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.login_mode_switch button {
+    padding: 0.2rem;
+    color: #174ea6;
+    background: transparent;
+    border: 0;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.login_mode_switch button:hover {
+    text-decoration: underline;
+}
+
+.google_signin_divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1rem 0;
+    color: #89949a;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.google_signin_divider::before,
+.google_signin_divider::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    background: #e8ecef;
+}
+
+.google_signin_button {
+    width: 100%;
+    min-height: 2.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 0.55rem 0.8rem;
+    color: #263238;
+    background: #fff;
+    border: 1px solid #d8dee3;
+    border-radius: 0.55rem;
+    font: inherit;
+    font-size: 0.87rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    transition: background 150ms ease, border-color 150ms ease;
+}
+
+.google_signin_button:not(:disabled):hover {
+    color: #263238;
+    background: #f8fafb;
+    border-color: #aeb9c1;
+}
+
+.google_signin_button:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.18);
+    outline-offset: 2px;
+}
+
+.google_signin_button:disabled {
+    color: #58656d;
+    background: #fafbfc;
+    cursor: not-allowed;
+}
+
+.google_mark {
+    color: #4285f4;
+    font-family: Arial, sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+@keyframes loginDropdownIn {
+    from {
+        opacity: 0;
+        transform: translateY(-0.35rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 575.98px) {
+    .login_dropdown {
+        right: -0.25rem;
+        padding: 1.25rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .login_dropdown {
+        animation: none;
+    }
+
+    .login_form input,
+    .login_submit {
+        transition: none;
+    }
+}

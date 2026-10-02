@@ -1,10 +1,17 @@
 const express = require("express");
 const cors = require("cors");
+const { authCors, registerAuthRoutes, verifyAuthOrigin } = require("./auth");
 
 const app = express();
 
-app.use(cors());
+const publicCors = cors();
+app.use((req, res, next) => {
+    if (req.path.startsWith("/api/auth")) return next();
+    return publicCors(req, res, next);
+});
+app.use("/api/auth", authCors, verifyAuthOrigin);
 app.use(express.json());
+registerAuthRoutes(app);
 
 
 // =========================
@@ -124,7 +131,7 @@ app.get("/", (req, res) => {
 // SERVER
 // =========================
 
-const PORT = 5000;
+const PORT = Number(process.env.PORT) || 5000;
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
