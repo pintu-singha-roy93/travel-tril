@@ -74,10 +74,10 @@ const Hotel = () => {
       <div className="container">
         <div className="section_head">
           <div className="section_head_left">
-            <h2 className="section_title">Trending right now</h2>
+            <h2 className="section_title">Find your next stay</h2>
 
             <p className="section_subtitle">
-              Because everyone else is doing it.
+              Well-rated hotels for a comfortable trip.
             </p>
           </div>
 

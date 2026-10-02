@@ -49,7 +49,7 @@ const CarDeals = () => {
             {/* Section Head */}
             <div className="section_head transport_head">
               <div className="section_head_left">
-                <h2 className="section_title">Top Flight Deals</h2>
+                <h2 className="section_title">Ride Options For Every Trip</h2>
 
                 <p className="section_subtitle">
                   Get there faster, cheaper, or with more legroom.
