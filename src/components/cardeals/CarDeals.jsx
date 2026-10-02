@@ -43,7 +43,6 @@ const CarDeals = () => {
     (item) => item.type === transportType,
   );
   return (
-    <div>
       <section className="transport_area btm_cmn_pad">
         <div className="container">
           <div className="transport_wrapper">
@@ -130,7 +129,6 @@ const CarDeals = () => {
           </div>
         </div>
       </section>
-    </div>
   );
 };
 

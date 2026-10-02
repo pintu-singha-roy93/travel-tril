@@ -45,7 +45,6 @@ const FlightDeals = () => {
   );
 
   return (
-    <div>
       <section className="flight_deals_area btm_cmn_pad">
         <div className="container">
           {/* Section Head */}
@@ -204,7 +203,6 @@ const FlightDeals = () => {
           </div>
         </div>
       </section>
-    </div>
   );
 };
 

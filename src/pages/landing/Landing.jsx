@@ -203,7 +203,7 @@ const Landing = () => {
               <button
                 type="button"
                 className="common-btn with_arrow"
-                onClick={() => navigate("/home")}
+                onClick={() => navigate("/")}
               >
                 <span>Start Planning</span>
 
