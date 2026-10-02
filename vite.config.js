@@ -5,6 +5,9 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [react()],
   server: {
+    watch: {
+      ignored: ['**/*.crdownload'],
+    },
     proxy: {
       '/api': {
         target: 'http://localhost:5000',

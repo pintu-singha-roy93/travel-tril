@@ -6,6 +6,9 @@ import hotel2 from "../../assets/images/index_hotel2.jpg";
 import hotel3 from "../../assets/images/index_hotel3.jpg";
 import hotel4 from "../../assets/images/index_hotel4.jpg";
 import hotel5 from "../../assets/images/coastal.jpg";
+import hotel6 from "../../assets/images/skyline.jpg";
+import hotel7 from "../../assets/images/garden.jpg";
+import hotel8 from "../../assets/images/harbor.jpg";
 
 import star from "../../assets/images/star.svg";
 import locationPlace from "../../assets/images/location_place.svg";
@@ -24,6 +27,9 @@ const Hotel = () => {
     index_hotel3: hotel3,
     index_hotel4: hotel4,
     index_hotel5: hotel5,
+    index_hotel6: hotel6,
+    index_hotel7: hotel7,
+    index_hotel8: hotel8
   };
 
   const featureIcons = {
