@@ -238,6 +238,75 @@ const hotelData = [
                 text: "Pool"
             }
         ]
+    },
+    {
+        id: 6,
+        image: "index_hotel6",
+        title: "Skyline Suites",
+        price: "$280",
+        location: "Midtown Heights",
+        rating: "4.7",
+        count: "(88)",
+        features: [
+            {
+                icon: "wifi",
+                text: "Free WiFi"
+            },
+            {
+                icon: "breakfast",
+                text: "Breakfast"
+            },
+            {
+                icon: "pool",
+                text: "Pool"
+            }
+        ]
+    },
+    {
+        id: 7,
+        image: "index_hotel7",
+        title: "Garden View Stay",
+        price: "$260",
+        location: "Old Town",
+        rating: "4.6",
+        count: "(72)",
+        features: [
+            {
+                icon: "wifi",
+                text: "Free WiFi"
+            },
+            {
+                icon: "breakfast",
+                text: "Breakfast"
+            },
+            {
+                icon: "pool",
+                text: "Pool"
+            }
+        ]
+    },
+    {
+        id: 8,
+        image: "index_hotel8",
+        title: "Harbor Lights Hotel",
+        price: "$340",
+        location: "Waterfront Bay",
+        rating: "4.9",
+        count: "(104)",
+        features: [
+            {
+                icon: "wifi",
+                text: "Free WiFi"
+            },
+            {
+                icon: "breakfast",
+                text: "Breakfast"
+            },
+            {
+                icon: "pool",
+                text: "Pool"
+            }
+        ]
     }
 ];
 
