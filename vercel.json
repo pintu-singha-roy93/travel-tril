@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://travel-tril-itbd.vercel.app/api/:path*"
+    }
+  ]
+}

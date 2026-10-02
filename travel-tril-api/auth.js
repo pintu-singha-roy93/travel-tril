@@ -1,46 +1,107 @@
 const crypto = require("node:crypto");
 const fs = require("node:fs");
+const os = require("node:os");
 const path = require("node:path");
 const dotenv = require("dotenv");
 const bcrypt = require("bcryptjs");
 const Database = require("better-sqlite3");
+const { Pool } = require("pg");
 const cors = require("cors");
 const { rateLimit } = require("express-rate-limit");
 const { OAuth2Client } = require("google-auth-library");
 
 dotenv.config({ path: path.join(__dirname, ".env") });
 
-const databasePath = process.env.AUTH_DATABASE_PATH || path.join(__dirname, "data", "auth.sqlite");
-fs.mkdirSync(path.dirname(databasePath), { recursive: true });
+const postgresPool = process.env.DATABASE_URL
+  ? new Pool({ connectionString: process.env.DATABASE_URL, max: 5 })
+  : null;
+const authStorageAvailable = !process.env.VERCEL || Boolean(postgresPool);
+let sqliteDatabase = null;
+let databaseReady = Promise.resolve();
 
-const database = new Database(databasePath);
-database.pragma("journal_mode = WAL");
-database.pragma("foreign_keys = ON");
-database.exec(`
-  CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    email TEXT NOT NULL UNIQUE COLLATE NOCASE,
-    password_hash TEXT NOT NULL,
-    picture TEXT,
-    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-  );
+if (postgresPool) {
+  databaseReady = postgresPool.query(`
+    CREATE TABLE IF NOT EXISTS users (
+      id BIGSERIAL PRIMARY KEY,
+      name TEXT NOT NULL,
+      email TEXT NOT NULL UNIQUE,
+      password_hash TEXT NOT NULL,
+      picture TEXT,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+    CREATE TABLE IF NOT EXISTS auth_sessions (
+      token_hash TEXT PRIMARY KEY,
+      user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      expires_at BIGINT NOT NULL,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+    CREATE INDEX IF NOT EXISTS auth_sessions_user_id_idx ON auth_sessions(user_id);
+  `).then(() => undefined);
+} else {
+  const databasePath = process.env.AUTH_DATABASE_PATH
+    || (process.env.VERCEL
+      ? path.join(os.tmpdir(), "travel-tril-auth.sqlite")
+      : path.join(__dirname, "data", "auth.sqlite"));
+  fs.mkdirSync(path.dirname(databasePath), { recursive: true });
 
-  CREATE TABLE IF NOT EXISTS auth_sessions (
-    token_hash TEXT PRIMARY KEY,
-    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    expires_at INTEGER NOT NULL,
-    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-  );
+  sqliteDatabase = new Database(databasePath);
+  sqliteDatabase.pragma("journal_mode = WAL");
+  sqliteDatabase.pragma("foreign_keys = ON");
+  sqliteDatabase.exec(`
+    CREATE TABLE IF NOT EXISTS users (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      email TEXT NOT NULL UNIQUE COLLATE NOCASE,
+      password_hash TEXT NOT NULL,
+      picture TEXT,
+      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
 
-  CREATE INDEX IF NOT EXISTS auth_sessions_user_id_idx
-    ON auth_sessions(user_id);
-`);
+    CREATE TABLE IF NOT EXISTS auth_sessions (
+      token_hash TEXT PRIMARY KEY,
+      user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      expires_at INTEGER NOT NULL,
+      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
 
-const userColumns = new Set(database.pragma("table_info(users)").map((column) => column.name));
-if (!userColumns.has("picture")) {
-  database.exec("ALTER TABLE users ADD COLUMN picture TEXT");
+    CREATE INDEX IF NOT EXISTS auth_sessions_user_id_idx ON auth_sessions(user_id);
+  `);
+
+  const userColumns = new Set(sqliteDatabase.pragma("table_info(users)").map((column) => column.name));
+  if (!userColumns.has("picture")) sqliteDatabase.exec("ALTER TABLE users ADD COLUMN picture TEXT");
 }
+
+function postgresParameters(sql) {
+  let parameterIndex = 0;
+  return sql.replace(/\?/g, () => `$${++parameterIndex}`);
+}
+
+const database = {
+  async get(sql, parameters = []) {
+    await databaseReady;
+    if (postgresPool) {
+      const result = await postgresPool.query(postgresParameters(sql), parameters);
+      return result.rows[0];
+    }
+    return sqliteDatabase.prepare(sql).get(...parameters);
+  },
+  async run(sql, parameters = []) {
+    await databaseReady;
+    if (postgresPool) return postgresPool.query(postgresParameters(sql), parameters);
+    return sqliteDatabase.prepare(sql).run(...parameters);
+  },
+  async insert(sql, parameters = []) {
+    await databaseReady;
+    if (postgresPool) {
+      const result = await postgresPool.query(
+        `${postgresParameters(sql)} RETURNING id`,
+        parameters,
+      );
+      return Number(result.rows[0].id);
+    }
+    return Number(sqliteDatabase.prepare(sql).run(...parameters).lastInsertRowid);
+  },
+};
 
 const cookieName = "traveltril_session";
 const googleStateCookieName = "traveltril_google_state";
@@ -91,6 +152,13 @@ function verifyAuthOrigin(req, res, next) {
   return next();
 }
 
+function requireAuthStorage(req, res, next) {
+  if (!authStorageAvailable) {
+    return res.status(503).json({ message: "Authentication storage is not configured on this deployment." });
+  }
+  return next();
+}
+
 function hashToken(token) {
   return crypto.createHash("sha256").update(token).digest("hex");
 }
@@ -127,13 +195,14 @@ function googleErrorRedirect(code) {
   return destination.toString();
 }
 
-function createSession(userId, res) {
+async function createSession(userId, res) {
   const token = crypto.randomBytes(32).toString("hex");
   const expiresAt = Date.now() + sessionDurationMs;
-  database.prepare("DELETE FROM auth_sessions WHERE expires_at <= ?").run(Date.now());
-  database
-    .prepare("INSERT INTO auth_sessions (token_hash, user_id, expires_at) VALUES (?, ?, ?)")
-    .run(hashToken(token), userId, expiresAt);
+  await database.run("DELETE FROM auth_sessions WHERE expires_at <= ?", [Date.now()]);
+  await database.run(
+    "INSERT INTO auth_sessions (token_hash, user_id, expires_at) VALUES (?, ?, ?)",
+    [hashToken(token), userId, expiresAt],
+  );
   res.cookie(cookieName, token, { ...cookieOptions, maxAge: sessionDurationMs });
 }
 
@@ -150,22 +219,23 @@ function publicUser(user) {
   };
 }
 
-function getUserBySession(req) {
+async function getUserBySession(req) {
   const token = readSessionToken(req);
   if (!token) return null;
 
-  const session = database
-    .prepare(`
+  const session = await database.get(
+    `
       SELECT users.id, users.name, users.email, auth_sessions.expires_at
       FROM auth_sessions
       JOIN users ON users.id = auth_sessions.user_id
       WHERE auth_sessions.token_hash = ?
-    `)
-    .get(hashToken(token));
+    `,
+    [hashToken(token)],
+  );
 
   if (!session) return null;
   if (session.expires_at <= Date.now()) {
-    database.prepare("DELETE FROM auth_sessions WHERE token_hash = ?").run(hashToken(token));
+    await database.run("DELETE FROM auth_sessions WHERE token_hash = ?", [hashToken(token)]);
     return null;
   }
   return session;
@@ -173,10 +243,10 @@ function getUserBySession(req) {
 
 function registerAuthRoutes(app) {
   app.get("/api/auth/google/status", (req, res) => {
-    return res.json({ enabled: Boolean(googleOAuthClient) });
+    return res.json({ enabled: Boolean(googleOAuthClient && authStorageAvailable) });
   });
 
-  app.get("/api/auth/google", (req, res) => {
+  app.get("/api/auth/google", requireAuthStorage, (req, res) => {
     if (!googleOAuthClient) {
       return res.status(503).send("Google sign-in is not configured on this server.");
     }
@@ -195,7 +265,7 @@ function registerAuthRoutes(app) {
     }));
   });
 
-  app.get("/api/auth/google/callback", async (req, res) => {
+  app.get("/api/auth/google/callback", requireAuthStorage, async (req, res) => {
     const stateCookie = readCookie(req, googleStateCookieName);
     res.clearCookie(googleStateCookieName, cookieOptions);
 
@@ -228,22 +298,24 @@ function registerAuthRoutes(app) {
         && profile.picture.startsWith("https://")
         ? profile.picture
         : null;
-      let user = database
-        .prepare("SELECT id, name, email, picture FROM users WHERE email = ?")
-        .get(email);
+      let user = await database.get(
+        "SELECT id, name, email, picture FROM users WHERE email = ?",
+        [email],
+      );
 
       if (user) {
-        database.prepare("UPDATE users SET picture = ? WHERE id = ?").run(picture, user.id);
+        await database.run("UPDATE users SET picture = ? WHERE id = ?", [picture, user.id]);
         user = { ...user, picture };
       } else {
         const unusablePasswordHash = await bcrypt.hash(crypto.randomBytes(32).toString("hex"), 12);
-        const result = database
-          .prepare("INSERT INTO users (name, email, password_hash, picture) VALUES (?, ?, ?, ?)")
-          .run(name, email, unusablePasswordHash, picture);
-        user = { id: Number(result.lastInsertRowid), name, email, picture };
+        const id = await database.insert(
+          "INSERT INTO users (name, email, password_hash, picture) VALUES (?, ?, ?, ?)",
+          [name, email, unusablePasswordHash, picture],
+        );
+        user = { id, name, email, picture };
       }
 
-      createSession(user.id, res);
+      await createSession(user.id, res);
       return res.redirect(authFrontendUrl);
     } catch (error) {
       console.error("Google sign-in failed:", error);
@@ -251,7 +323,7 @@ function registerAuthRoutes(app) {
     }
   });
 
-  app.post("/api/auth/register", authAttemptLimit, async (req, res) => {
+  app.post("/api/auth/register", authAttemptLimit, requireAuthStorage, async (req, res) => {
     const name = typeof req.body?.name === "string" ? req.body.name.trim() : "";
     const email = typeof req.body?.email === "string" ? req.body.email.trim().toLowerCase() : "";
     const password = typeof req.body?.password === "string" ? req.body.password : "";
@@ -268,14 +340,15 @@ function registerAuthRoutes(app) {
 
     try {
       const passwordHash = await bcrypt.hash(password, 12);
-      const result = database
-        .prepare("INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)")
-        .run(name, email, passwordHash);
-      const user = { id: Number(result.lastInsertRowid), name, email, picture: null };
-      createSession(user.id, res);
+      const id = await database.insert(
+        "INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)",
+        [name, email, passwordHash],
+      );
+      const user = { id, name, email, picture: null };
+      await createSession(user.id, res);
       return res.status(201).json({ user });
     } catch (error) {
-      if (error.code === "SQLITE_CONSTRAINT_UNIQUE") {
+      if (error.code === "SQLITE_CONSTRAINT_UNIQUE" || error.code === "23505") {
         return res.status(409).json({ message: "An account with this email already exists." });
       }
       console.error("Account registration failed:", error);
@@ -283,12 +356,13 @@ function registerAuthRoutes(app) {
     }
   });
 
-  app.post("/api/auth/login", authAttemptLimit, async (req, res) => {
+  app.post("/api/auth/login", authAttemptLimit, requireAuthStorage, async (req, res) => {
     const email = typeof req.body?.email === "string" ? req.body.email.trim().toLowerCase() : "";
     const password = typeof req.body?.password === "string" ? req.body.password : "";
-    const user = database
-      .prepare("SELECT id, name, email, password_hash, picture FROM users WHERE email = ?")
-      .get(email);
+    const user = await database.get(
+      "SELECT id, name, email, password_hash, picture FROM users WHERE email = ?",
+      [email],
+    );
 
     const passwordMatches = user && password
       ? await bcrypt.compare(password, user.password_hash)
@@ -298,20 +372,20 @@ function registerAuthRoutes(app) {
       return res.status(401).json({ message: "Email or password is incorrect." });
     }
 
-    createSession(user.id, res);
+    await createSession(user.id, res);
     return res.json({ user: publicUser(user) });
   });
 
-  app.get("/api/auth/me", (req, res) => {
-    const user = getUserBySession(req);
+  app.get("/api/auth/me", requireAuthStorage, async (req, res) => {
+    const user = await getUserBySession(req);
     if (!user) return res.json({ user: null });
     return res.json({ user: publicUser(user) });
   });
 
-  app.post("/api/auth/logout", (req, res) => {
+  app.post("/api/auth/logout", requireAuthStorage, async (req, res) => {
     const token = readSessionToken(req);
     if (token) {
-      database.prepare("DELETE FROM auth_sessions WHERE token_hash = ?").run(hashToken(token));
+      await database.run("DELETE FROM auth_sessions WHERE token_hash = ?", [hashToken(token)]);
     }
     clearSession(res);
     return res.json({ message: "Signed out." });
